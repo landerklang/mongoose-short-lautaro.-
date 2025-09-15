@@ -1,10 +1,10 @@
 import { TagModels } from "../models/tag.models.js";
 
 export const createdTag = async (req, res) => {
-  const { name, creadetFor, articles } = req.body;
+  const { name, creadetFor } = req.body;
 
   try {
-    const created = await TagModels.create({ name, creadetFor, articles });
+    const created = await TagModels.create({ name, creadetFor });
     res.status(201).json({
       ok: true,
       msg: "se creo correctameten el usuario",
