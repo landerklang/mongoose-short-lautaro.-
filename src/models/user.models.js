@@ -17,8 +17,8 @@ const UserSchema = new Schema(
       require: true,
     },
     more_data: {
-      firt_name: { type: String, require: true },
-      last_name: { type: String, require: true },
+      firt_name: { type: String },
+      last_name: { type: String },
       telefone: { type: Number, require: true },
     },
   },

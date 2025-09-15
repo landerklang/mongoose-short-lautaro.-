@@ -1,12 +1,13 @@
 import { UserModel } from "../models/user.models.js";
 
 export const createdUser = async (req, res) => {
-  const { username, password, email } = req.body;
+  const { username, password, email, more_data } = req.body;
   try {
     const user = await UserModel.create({
       username,
       password,
       email,
+      more_data,
     });
     res
       .status(201)
@@ -21,7 +22,7 @@ export const createdUser = async (req, res) => {
 
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await UserModel.find().populate("roles");
+    const users = await UserModel.find();
 
     res.status(200).json({
       ok: true,
@@ -77,13 +78,11 @@ export const deletedUser = async (req, res) => {
   const { id } = req.params;
   try {
     const deleted = await UserModel.findByIdAndDelete(id);
-    res
-      .status(200)
-      .json({
-        ok: true,
-        msg: "usuario eliminado correctamente",
-        data: deleted,
-      });
+    res.status(200).json({
+      ok: true,
+      msg: "usuario eliminado correctamente",
+      data: deleted,
+    });
   } catch (error) {
     return res.status(500).json({
       ok: false,
