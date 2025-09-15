@@ -1,11 +1,11 @@
 import { Router } from "express";
 import {
   createdTag,
+  deletedTag,
   getAllTag,
   getTagById,
   updateTag,
-} from "../controller/tags.controller";
-import { deletedArticle } from "../controller/article.controller";
+} from "../controller/tags.controller.js";
 
 export const tagRouters = Router();
 
@@ -17,4 +17,4 @@ tagRouters.get("/tag/:id", getTagById);
 
 tagRouters.put("/tag/:id", updateTag);
 
-tagRouters.delete("/tag/:id", deletedArticle);
+tagRouters.delete("/tag/:id", deletedTag);

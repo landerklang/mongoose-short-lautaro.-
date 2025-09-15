@@ -1,10 +1,10 @@
 import { articleModel } from "../models/article.models.js";
 
 export const createdArticle = async (req, res) => {
-  const { title, content, author } = req.body;
+  const { title, content, author, tags } = req.body;
 
   try {
-    const created = await articleModel.create({ title, content, author });
+    const created = await articleModel.create({ title, content, author, tags });
     res.status(201).json({
       ok: true,
       msg: "se creo correctameten el usuario",
@@ -19,7 +19,7 @@ export const createdArticle = async (req, res) => {
 
 export const getAllArticle = async (req, res) => {
   try {
-    const articles = await articleModel.find();
+    const articles = await articleModel.find().populate("author", "tag");
     res.status(200).json({ ok: true, data: articles });
   } catch (error) {
     return res

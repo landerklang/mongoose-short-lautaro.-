@@ -2,9 +2,10 @@ import { model, Schema, Types } from "mongoose";
 
 const articleschema = new Schema(
   {
-    title: { type: String, unique: true, require: true },
-    content: { type: String, require: true },
-    author: { type: Types.ObjectId, ref: "User", require: true, unique: true },
+    title: { type: String, unique: true, required: true },
+    content: { type: String, required: true },
+    author: { type: Types.ObjectId, ref: "User", required: true },
+    tags: [{ type: Types.ObjectId, ref: "tags", required: true }],
   },
   { versionKey: false }
 );

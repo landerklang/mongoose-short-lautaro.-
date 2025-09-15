@@ -1,10 +1,10 @@
 import { TagModels } from "../models/tag.models.js";
 
 export const createdTag = async (req, res) => {
-  const { name } = req.body;
+  const { name, creadetFor, articles } = req.body;
 
   try {
-    const created = await TagModels.create({ name });
+    const created = await TagModels.create({ name, creadetFor, articles });
     res.status(201).json({
       ok: true,
       msg: "se creo correctameten el usuario",
@@ -19,7 +19,7 @@ export const createdTag = async (req, res) => {
 
 export const getAllTag = async (req, res) => {
   try {
-    const tags = await TagModels.find();
+    const tags = await TagModels.find().populate("creadedFor");
     res.status(200).json({ ok: true, data: tags });
   } catch (error) {
     return res
