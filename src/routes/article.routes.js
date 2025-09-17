@@ -1,20 +1,20 @@
 import { Router } from "express";
 import {
   createdArticle,
-  deletedArticle,
   getAllArticle,
   getArticleByPk,
   updateArticle,
+  deletedArticle,
 } from "../controller/article.controller.js";
 
-export const articleRoutes = Router();
+export const ArticleRoutes = Router();
 
-articleRoutes.use("/article", createdArticle);
+ArticleRoutes.use("/articles", createdArticle);
 
-articleRoutes.get("/article", getAllArticle);
+ArticleRoutes.get("/articles", getAllArticle);
 
-articleRoutes.get("/article/:id", getArticleByPk);
+ArticleRoutes.get("/articles/:id", getArticleByPk);
 
-articleRoutes.put("/article/:id", updateArticle);
+ArticleRoutes.put("/articles/:id", updateArticle);
 
-articleRoutes.delete("/article/:id", deletedArticle);
+ArticleRoutes.delete("/articles/:id", deletedArticle);
