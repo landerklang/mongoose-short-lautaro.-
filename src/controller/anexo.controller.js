@@ -21,7 +21,9 @@ export const createdAnexo = async (req, res) => {
 
 export const getAllAnexo = async (req, res) => {
   try {
-    const getanexo = await anexoModels.find().populate("article");
+    const getanexo = await anexoModels
+      .find({ deleted: false })
+      .populate("article");
     res.status(200).json({ ok: true, data: getanexo });
   } catch (error) {
     return res
@@ -70,11 +72,16 @@ export const updateAnexo = async (req, res) => {
 export const deletedAnexo = async (req, res) => {
   const { id } = req.params;
   try {
-    const deleted = await anexoModels.findByIdAndDelete(id);
+    const delet = await anexoModels.findByIdAndUpdate(
+      id,
+      { deleted: true },
+      { new: true }
+      // eliminacion logica
+    );
     res.status(200).json({
       ok: true,
       msg: "usuario eliminado correctamente",
-      data: deleted,
+      data: delet,
     });
   } catch (error) {
     return res.status(500).json({

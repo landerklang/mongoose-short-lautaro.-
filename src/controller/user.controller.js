@@ -1,3 +1,5 @@
+import { articleModel } from "../models/article.models.js";
+import { TagModels } from "../models/tag.models.js";
 import { UserModel } from "../models/user.models.js";
 
 export const createdUser = async (req, res) => {
@@ -78,6 +80,8 @@ export const deletedUser = async (req, res) => {
   const { id } = req.params;
   try {
     const deleted = await UserModel.findByIdAndDelete(id);
+    await articleModel.deleteMany();
+    await TagModels.deleteMany();
     res.status(200).json({
       ok: true,
       msg: "usuario eliminado correctamente",
