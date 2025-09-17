@@ -1,6 +1,6 @@
 import { model, Schema, Types } from "mongoose";
 
-const Tagschema = new Schema({
+const TagSchema = new Schema({
   name: { type: String, unique: true, required: true },
   creadetFor: {
     type: Types.ObjectId,
@@ -10,10 +10,10 @@ const Tagschema = new Schema({
   articles: [
     {
       type: Types.ObjectId,
-      ref: "article",
+      ref: "Article",
       required: true,
     },
   ],
 });
 
-export const TagModels = model("Tags", Tagschema);
+export const TagModels = model("Tags", TagSchema);
