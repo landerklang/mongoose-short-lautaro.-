@@ -2,7 +2,6 @@ import { articleModel } from "../models/article.models.js";
 
 export const createdArticle = async (req, res) => {
   const { title, content, author, tags } = req.body;
-
   try {
     const created = await articleModel.create({ title, content, author, tags });
     res.status(201).json({
@@ -11,6 +10,7 @@ export const createdArticle = async (req, res) => {
       data: created,
     });
   } catch (error) {
+    // console.log(error);
     return res
       .status(500)
       .json({ ok: false, msg: "error interno del servidor" });
@@ -19,12 +19,15 @@ export const createdArticle = async (req, res) => {
 
 export const getAllArticle = async (req, res) => {
   try {
-    const articles = await articleModel.find().populate("author", "tag");
+    const articles = await articleModel
+      .find()
+      .populate("author")
+      .populate("tags")
+      .populate("Anexo");
     res.status(200).json({ ok: true, data: articles });
   } catch (error) {
-    return res
-      .status(500)
-      .json({ ok: false, msg: "error interno del servidor" });
+    console.log(error);
+    return res.status(500).json({ ok: false, msg: "interno del servidor" });
   }
 };
 

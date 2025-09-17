@@ -9,7 +9,7 @@ import {
 
 export const ArticleRoutes = Router();
 
-ArticleRoutes.use("/articles", createdArticle);
+ArticleRoutes.post("/articles", createdArticle);
 
 ArticleRoutes.get("/articles", getAllArticle);
 

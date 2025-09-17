@@ -11,6 +11,7 @@ export const createdTag = async (req, res) => {
       data: created,
     });
   } catch (error) {
+    console.log(error);
     return res
       .status(500)
       .json({ ok: false, msg: "error interno del servidor" });
@@ -19,7 +20,7 @@ export const createdTag = async (req, res) => {
 
 export const getAllTag = async (req, res) => {
   try {
-    const tags = await TagModels.find().populate("creadedFor");
+    const tags = await TagModels.find().populate("creadetFor");
     res.status(200).json({ ok: true, data: tags });
   } catch (error) {
     return res
