@@ -26,4 +26,5 @@ articleSchema.set("toJSON", {
     delete result.id;
   },
 });
+// para poder utilizar el populate sin que en la colecion tenga una relacion se debe utilizar la anterior consulta donde le estoy pidiendo que se genero un obejto de tipo virtual que permite realizar una referencia con este
 export const articleModel = model("Article", articleSchema);

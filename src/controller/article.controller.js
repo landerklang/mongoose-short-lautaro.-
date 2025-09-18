@@ -26,7 +26,7 @@ export const getAllArticle = async (req, res) => {
       .populate("Anexo");
     res.status(200).json({ ok: true, data: articles });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({ ok: false, msg: "interno del servidor" });
   }
 };
@@ -42,7 +42,7 @@ export const getArticleByPk = async (req, res) => {
       data: getarticle,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       ok: false,
       msg: "Error interno del servidor",
@@ -82,5 +82,25 @@ export const deletedArticle = async (req, res) => {
       ok: false,
       msg: "error interno del servidor",
     });
+  }
+};
+
+export const updaterelacionfromarticle = async (req, res) => {
+  const { id, tagsid } = req.params;
+  try {
+    const updateTag = await articleModel.findByIdAndUpdate(
+      id,
+      {
+        $push: { tags: tagsid },
+      },
+      { new: true }
+    );
+    res
+      .status(200)
+      .json({ ok: true, msg: "se añadio la relacion", data: updateTag });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ ok: false, msg: "error interno del servidor" });
   }
 };

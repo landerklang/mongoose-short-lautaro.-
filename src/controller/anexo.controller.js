@@ -22,7 +22,7 @@ export const createdAnexo = async (req, res) => {
 export const getAllAnexo = async (req, res) => {
   try {
     const getanexo = await anexoModels
-      .find({ deleted: false })
+      .find({ isdeleted: false })
       .populate("article");
     res.status(200).json({ ok: true, data: getanexo });
   } catch (error) {
@@ -43,7 +43,7 @@ export const getAnexoById = async (req, res) => {
       data: getanexoID,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       ok: false,
       msg: "Error interno del servidor",
@@ -74,9 +74,9 @@ export const deletedAnexo = async (req, res) => {
   try {
     const delet = await anexoModels.findByIdAndUpdate(
       id,
-      { deleted: true },
+      { isdeleted: true },
       { new: true }
-      // eliminacion logica
+      // permite realizar un eliminacion logica
     );
     res.status(200).json({
       ok: true,
